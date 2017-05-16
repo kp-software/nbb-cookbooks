@@ -16,4 +16,3 @@ package 'tmux'
 package 'imagemagick'
 
 include_recipe 'opsworks_ruby::setup'
-
