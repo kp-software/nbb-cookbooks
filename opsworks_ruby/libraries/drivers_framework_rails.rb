@@ -9,12 +9,12 @@ module Drivers
         migrate migration_command deploy_environment assets_precompile assets_precompilation_command
         envs_in_console
       ]
-      packages debian: 'zlib1g-dev', rhel: 'zlib-devel'
+      packages debian: %w[libxml2-dev tzdata zlib1g-dev], rhel: %w[libxml2-devel tzdata zlib-devel]
       log_paths lambda { |context|
-        File.join(context.send(:deploy_dir, context.app), 'shared', 'log', "#{context.send(:deploy_env)}.log")
+        File.join(context.send(:deploy_dir, context.app), 'shared', 'log', '*.log')
       }
 
-      def raw_out
+      def settings
         super.merge(deploy_environment: { 'RAILS_ENV' => deploy_env })
       end
 
@@ -34,7 +34,7 @@ module Drivers
       private
 
       def database_yml(db)
-        return unless db.applicable_for_configuration?
+        return unless db.applicable_for_configuration? && db.can_migrate?
 
         database = db.out
         deploy_environment = deploy_env

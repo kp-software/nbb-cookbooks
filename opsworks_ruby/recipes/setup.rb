@@ -7,6 +7,19 @@
 
 prepare_recipe
 
+# Monit and cleanup
+if node['platform_family'] == 'debian'
+  execute 'mkdir -p /etc/monit/conf.d'
+
+  file '/etc/monit/conf.d/00_httpd.monitrc' do
+    content "set httpd port 2812 and\n    use address localhost\n    allow localhost"
+  end
+
+  apt_package 'javascript-common' do
+    action :purge
+  end
+end
+
 # Ruby and bundler
 include_recipe 'deployer'
 if node['platform_family'] == 'debian'
@@ -24,7 +37,7 @@ apt_repository 'apache2' do
   components %w[main]
   keyserver 'keyserver.ubuntu.com'
   key 'E5267A6C'
-  only_if { node['platform'] == 'ubuntu' }
+  only_if { node['defaults']['webserver']['use_apache2_ppa'] }
 end
 
 gem_package 'bundler' do

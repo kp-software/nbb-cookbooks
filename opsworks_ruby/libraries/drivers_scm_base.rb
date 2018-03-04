@@ -13,23 +13,20 @@ module Drivers
         handle_packages
       end
 
-      def out
-        handle_output(raw_out)
-      end
-
-      def raw_out
-        return out_defaults if configuration_data_source == :node_engine
+      def settings
+        return default_settings if configuration_data_source == :node_engine
         app_source = app['app_source']
 
-        out_defaults.merge(
+        default_settings.merge(
           scm_provider: adapter.constantize, repository: app_source['url'], revision: app_source['revision']
         )
       end
 
-      def out_defaults
-        base = node['defaults']['scm'].to_h.symbolize_keys
-        base = base.merge(JSON.parse((node['deploy'][app['shortname']]['scm'] || {}).to_json, symbolize_names: true))
-        defaults.merge(base).merge(scm_provider: adapter.constantize)
+      def default_settings
+        base = node['defaults'][driver_type].merge(
+          node['deploy'][app['shortname']][driver_type] || {}
+        ).symbolize_keys.merge(scm_provider: adapter.constantize)
+        defaults.merge(base)
       end
 
       protected
@@ -39,7 +36,7 @@ module Drivers
       end
 
       def node_engine
-        node['deploy'][app['shortname']]['scm'].try(:[], 'adapter')
+        node['deploy'][app['shortname']][driver_type].try(:[], 'adapter')
       end
     end
   end

@@ -2,7 +2,7 @@
 # Cookbook:: rsyslog
 # Recipe:: client
 #
-# Copyright:: 2009-2016, Chef Software, Inc.
+# Copyright:: 2009-2017, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ results = search(:node, node['rsyslog']['server_search']).map do |server|
     ipaddress = server['cloud']['local_ipv4']
   end
   ipaddress
-end
+end unless node['rsyslog']['server_search'].to_s.empty?
 server_ips = Array(node['rsyslog']['server_ip']) + Array(results)
 
 rsyslog_servers = []

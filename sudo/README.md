@@ -10,9 +10,10 @@ The default recipe installs the `sudo` package and configures the `/etc/sudoers`
 
 - Debian/Ubuntu
 - RHEL/CentOS/Scientific/Amazon/Oracle
+- Amazon Linux
 - FreeBSD
-- Mac OS X
-- openSUSE / Suse
+- macOS
+- openSUSE / SUSE Enterprise
 
 ### Chef
 
@@ -24,10 +25,10 @@ The default recipe installs the `sudo` package and configures the `/etc/sudoers`
 
 ## Attributes
 
-- `node['authorization']['sudo']['groups']` - groups to enable sudo access (default: `[ "sysadmin" ]`)
+- `node['authorization']['sudo']['groups']` - groups to enable sudo access (default: `[]`)
 - `node['authorization']['sudo']['users']` - users to enable sudo access (default: `[]`)
 - `node['authorization']['sudo']['passwordless']` - use passwordless sudo (default: `false`)
-- `node['authorization']['sudo']['include_sudoers_d']` - include and manage `/etc/sudoers.d` (default: `false`)
+- `node['authorization']['sudo']['include_sudoers_d']` - include and manage `/etc/sudoers.d` (default: `true` on Linux systems. Note: older / EOL distros do not support this feature)
 - `node['authorization']['sudo']['agent_forwarding']` - preserve `SSH_AUTH_SOCK` when sudoing (default: `false`)
 - `node['authorization']['sudo']['sudoers_defaults']` - Array of `Defaults` entries to configure in `/etc/sudoers`
 - `node['authorization']['sudo']['setenv']` - Whether to permit preserving of environment with `sudo -E` (default: `false`)
@@ -133,21 +134,6 @@ node.default['authorization']['sudo']['sudoers_defaults'] = [
 ]
 ```
 
-_RHEL family 5.x_ The version of sudo in RHEL 5 may not support `+=`, as used in `env_keep`, so its a single string.
-
-```ruby
-node.default['authorization']['sudo']['sudoers_defaults'] = [
-  '!visiblepw',
-  'env_reset',
-  'env_keep = "COLORS DISPLAY HOSTNAME HISTSIZE INPUTRC KDEDIR \
-               LS_COLORS MAIL PS1 PS2 QTDIR USERNAME \
-               LANG LC_ADDRESS LC_CTYPE LC_COLLATE LC_IDENTIFICATION \
-               LC_MEASUREMENT LC_MESSAGES LC_MONETARY LC_NAME LC_NUMERIC \
-               LC_PAPER LC_TELEPHONE LC_TIME LC_ALL LANGUAGE LINGUAS \
-               _XKB_CHARSET XAUTHORITY"'
-]
-```
-
 _RHEL family 6.x_
 
 ```ruby
@@ -186,9 +172,10 @@ node.default['authorization']['sudo']['sudoers_defaults'] = [
 
 ### Sudo Resource
 
-**Note** Sudo version 1.7.2 or newer is required to use the sudo LWRP as it relies on the "#includedir" directive introduced in version 1.7.2. The recipe does not enforce installing the version. To use this LWRP, set `node['authorization']['sudo']['include_sudoers_d']` to `true`.
+**Note** Sudo version 1.7.2 or newer is required to use the sudo LWRP as it relies on the "#includedir" directive introduced in version 1.7.2\. The recipe does not enforce installing the version. Supported releases of Ubuntu, Debian and RHEL (6+) all support this feature.
 
 There are two ways for rendering a sudoer-fragment using this LWRP:
+
 1. Using the built-in template
 2. Using a custom, cookbook-level template
 
@@ -224,108 +211,31 @@ In either case, the following file would be generated in `/etc/sudoers.d/tomcat`
 
 #### Resource Properties
 
-<table>
-  <thead>
-    <tr>
-      <th>Attribute</th>
-      <th>Description</th>
-      <th>Example</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <td>name</td>
-      <td>name of the `/etc/sudoers.d` file</td>
-      <td><tt>restart-tomcat</tt></td>
-      <td>current resource name</td>
-    </tr>
-    <tr>
-      <td>commands</td>
-      <td>array of commands this sudoer can execute</td>
-      <td><tt>['/etc/init.d/tomcat restart']</tt></td>
-      <td><tt>['ALL']</tt></td>
-    </tr>
-    <tr>
-      <td>group</td>
-      <td>group to provide sudo privileges to, except `%` is prepended to the name in
-case it is not already</td>
-      <td><tt>%admin</tt></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>nopasswd</td>
-      <td>supply a password to invoke sudo</td>
-      <td><tt>true</tt></td>
-      <td><tt>false</tt></td>
-    </tr>
-    <tr>
-      <td>noexec</td>
-      <td>prevents commands from shelling out</td>
-      <td><tt>true</tt></td>
-      <td><tt>false</tt></td>
-    </tr>
-    <tr>
-      <td>runas</td>
-      <td>User the command(s) can be run as</td>
-      <td><tt>root</tt></td>
-      <td><tt>ALL</tt></td>
-    </tr>
-    <tr>
-      <td>template</td>
-      <td>the erb template to render instead of the default</td>
-      <td><tt>restart-tomcat.erb</tt></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>user</td>
-      <td>user to provide sudo privileges to</td>
-      <td><tt>tomcat</tt></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>defaults</td>
-      <td>array of defaults this user has</td>
-      <td><tt>['!requiretty','env_reset']</tt></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>setenv</td>
-      <td>whether to permit the preserving of environment with `sudo -E`</td>
-      <td><tt>true</tt></td>
-      <td><tt><false></tt></td>
-    </tr>
-    <tr>
-      <td>env_keep_add</td>
-      <td>array of strings to add to env_keep</td>
-      <td><tt>['HOME', 'MY_ENV_VAR MY_OTHER_ENV_VAR']</tt></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>env_keep_subtract</td>
-      <td>array of strings to remove from env_keep</td>
-      <td><tt>['DISPLAY', 'MY_SECURE_ENV_VAR']</tt></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>variables</td>
-      <td>the variables to pass to the custom template</td>
-      <td><tt>:commands => ['/etc/init.d/tomcat restart']</tt></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+Attribute         | Description                                                                                        | Example                                  | Default
+----------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------- | ---------------------
+name              | name of the `/etc/sudoers.d` file                                                                  | restart-tomcat                           | current resource name
+commands          | array of commands this sudoer can execute                                                          | ['/etc/init.d/tomcat restart']           | ['ALL']
+group             | group to provide sudo privileges to, except `%` is prepended to the name in case it is not already | %admin                                   |
+nopasswd          | supply a password to invoke sudo                                                                   | true                                     | false
+noexec            | prevents commands from shelling out                                                                | true                                     | false
+runas             | User the command(s) can be run as                                                                  | root                                     | ALL
+template          | the erb template to render instead of the default                                                  | restart-tomcat.erb                       |
+user              | user to provide sudo privileges to                                                                 | tomcat                                   |
+defaults          | array of defaults this user has                                                                    | ['!requiretty','env_reset']              |
+setenv            | whether to permit the preserving of environment with `sudo -E`                                     | true                                     | false
+env_keep_add      | array of strings to add to env_keep                                                                | ['HOME', 'MY_ENV_VAR MY_OTHER_ENV_VAR']  |
+env_keep_subtract | array of strings to remove from env_keep                                                           | ['DISPLAY', 'MY_SECURE_ENV_VAR']         |
+variables         | the variables to pass to the custom template                                                       | commands: ['/etc/init.d/tomcat restart'] |
 
 **If you use the template attribute, all other attributes will be ignored except for the variables attribute.**
 
-## License & Authors
+## Maintainers
 
-**Author:** Bryan W. Berry [bryan.berry@gmail.com](mailto:bryan.berry@gmail.com)
+This cookbook is maintained by Chef's Community Cookbook Engineering team. Our goal is to improve cookbook quality and to aid the community in contributing to cookbooks. To learn more about our team, process, and design goals see our [team documentation](https://github.com/chef-cookbooks/community_cookbook_documentation/blob/master/COOKBOOK_TEAM.MD). To learn more about contributing to cookbooks like this see our [contributing documentation](https://github.com/chef-cookbooks/community_cookbook_documentation/blob/master/CONTRIBUTING.MD), or if you have general questions about this cookbook come chat with us in #cookbok-engineering on the [Chef Community Slack](http://community-slack.chef.io/)
 
-**Author:** Cookbook Engineering Team ([cookbooks@chef.io](mailto:cookbooks@chef.io))
+## License
 
-**Copyright:** 2008-2016, Chef Software, Inc.
+**Copyright:** 2008-2017, Chef Software, Inc.
 
 ```
 Licensed under the Apache License, Version 2.0 (the "License");

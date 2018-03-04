@@ -2,6 +2,47 @@
 
 This file is used to list changes made in each version of the sudo cookbook.
 
+## 4.0.1 (2018-02-16)
+
+- FIX: in templates the attribute "passwordless" and other with data type String always will be return true
+- Add an attribute for setting sudoers.d mode
+
+## 4.0.0 (2017-11-28)
+
+### Breaking Changes
+
+- sudo .d functionality is now enabled by default on Linux systems. This allows the sudo resource to function with setting `node['authorization']['sudo']['include_sudoers_d']` to true. Only some older / EoL distros this will break sudo functionality so make sure you test this and set it to false if you're running an EoL distro
+- The `sysadmin` group is no longer added to sudoers by default anymore. Historically many community cookbooks assumed all admins were in this sysadmins group. We've moved away from that assumption since it was a suprise to many when this group was added. If you rely on this behavior make sure to `node['authorization']['sudo']['groups']` attribute to inlude the sysadmin group. 
+
+### Other Changes
+
+- Remove the debian-isms from the sudo.d readme file which is copied onto multiple Linux systems
+- Remove an old RHEL 5 example from the readme
+- Fix ChefSpec warnings
+- Improve Travis testing and add Debian 9 testing
+- Setenv for restricted users
+- Improve visudo path resolution on non-Debian distros
+
+## 3.5.3 (2017-07-09)
+
+- Add amazon linux to the metadata
+- Remove extra spaces in the sudoer template
+- Update platform names in the readme
+- Replace the HTML table with markdown
+
+## 3.5.2 (2017-06-26)
+
+- Remove totally bogus "supports" attribute from the resource
+- Revert "Remove sysadmin from default groups". We'll handle this differently going forward. Sorry for the breakage
+
+## 3.5.1 (2017-06-21)
+
+- Remove sysadmin from default groups as sysadmin is no longer a group we push via the users cookbook.
+
+## 3.5.0 (2017-05-16)
+
+- Add sudo package management to resource 
+
 ## 3.4.0 (2017-04-26)
 
 - Add lwrp support for only env_keep add/subtract

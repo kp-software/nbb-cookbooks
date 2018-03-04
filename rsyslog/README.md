@@ -11,16 +11,11 @@ Installs and configures rsyslog to replace syslogd for client and/or server use.
 - Debian/Ubuntu
 - RHEL/CentOS/Scientific/Amazon/Oracle
 - Fedora
-- OmniOS r151006c
 - OpenSUSE
 
 ### Chef
 
-- Chef 12.1+
-
-### Cookbooks
-
-- compat_resource
+- Chef 12.7+
 
 ### Other
 
@@ -52,6 +47,7 @@ See `attributes/default.rb` for default values.
 - `node['rsyslog']['dir_create_mode']` - Mode that should be set when creating log directories
 - `node['rsyslog']['umask']` - Specify the processes umask
 - `node['rsyslog']['defaults_file']` - The full path to the defaults/sysconfig file for the service.
+- `node['rsyslog']['package_name']` - Specify rsyslog package name
 - `node['rsyslog']['service_name']` - The platform-specific name of the service
 - `node['rsyslog']['preserve_fqdn']` - Value of the `$PreserveFQDN` configuration directive in `/etc/rsyslog.conf`. Default is 'off' for compatibility purposes.
 - `node['rsyslog']['high_precision_timestamps']` - Enable high precision timestamps, instead of the "old style" format. Default is 'false'.
@@ -234,7 +230,7 @@ default_attributes(
 - Author:: Tim Smith ([tsmith@chef.io](mailto:tsmith@chef.io))
 
 ```text
-Copyright:: 2009-2015, Chef Software, Inc
+Copyright:: 2009-2017, Chef Software, Inc
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

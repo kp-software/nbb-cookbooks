@@ -2,7 +2,7 @@
 # Cookbook:: sudo
 # Attribute:: File:: default
 #
-# Copyright:: 2008-2016, Chef Software, Inc.
+# Copyright:: 2008-2017, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,11 +17,12 @@
 # limitations under the License.
 #
 
-default['authorization']['sudo']['groups']            = ['sysadmin']
+default['authorization']['sudo']['groups']            = []
 default['authorization']['sudo']['users']             = []
 default['authorization']['sudo']['passwordless']      = false
 default['authorization']['sudo']['setenv']            = false
-default['authorization']['sudo']['include_sudoers_d'] = false
+default['authorization']['sudo']['include_sudoers_d'] = node['os'] == 'linux' ? true : false
+default['authorization']['sudo']['sudoers_d_mode']    = '0755'
 default['authorization']['sudo']['agent_forwarding']  = false
 default['authorization']['sudo']['sudoers_defaults']  = ['!lecture,tty_tickets,!fqdn']
 default['authorization']['sudo']['command_aliases']   = []

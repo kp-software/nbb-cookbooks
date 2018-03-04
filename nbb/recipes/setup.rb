@@ -14,5 +14,6 @@ include_recipe 'yarn'
 package 'htop'
 package 'tmux'
 package 'imagemagick'
+package 'redis-server'
 
 include_recipe 'opsworks_ruby::setup'

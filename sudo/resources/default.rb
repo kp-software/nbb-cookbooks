@@ -34,14 +34,7 @@ attribute :command_aliases,   kind_of: Array,            default: []
 attribute :setenv,            equal_to: [true, false],   default: false
 attribute :env_keep_add,      kind_of: Array,            default: []
 attribute :env_keep_subtract, kind_of: Array,            default: []
-
-# Set default for the supports attribute in initializer since it is
-# a 'reserved' attribute name
-def initialize(*args)
-  super
-  @action = :install
-  @supports = { report: true, exception: true }
-end
+attribute :visudo_path,       kind_of: String,           default: nil
 
 state_attrs :commands,
             :group,
