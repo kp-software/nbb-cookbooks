@@ -3,7 +3,7 @@
 berks update
 berks package cookbooks.tar.gz
 
-tar -xf cookbooks.tar.gz -C ../nbb-cookbooks
+tar -xvf cookbooks.tar.gz -C ../nbb-cookbooks
 
 rm cookbooks.tar.gz
 
