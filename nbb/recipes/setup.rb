@@ -15,5 +15,6 @@ package 'htop'
 package 'tmux'
 package 'imagemagick'
 package 'redis-server'
+package 'redis-tools'
 
 include_recipe 'opsworks_ruby::setup'
