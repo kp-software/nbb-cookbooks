@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
-# ruby
+# deployer
+default['deployer']['user'] = 'deploy'
+default['deployer']['group'] = 'deploy'
+default['deployer']['home'] = "/home/#{default['deployer']['user']}"
 
+# ruby
 default['build-essential']['compile_time'] = true
-default['ruby-ng']['ruby_version'] = node['ruby'].try(:[], 'version') || '2.4'
+default['ruby-version'] = node['ruby'].try(:[], 'version') || '2.5'
 default['nginx']['source']['modules'] = %w[
   nginx::http_ssl_module nginx::http_realip_module nginx::http_gzip_static_module nginx::headers_more_module
   nginx::http_stub_status_module
@@ -35,10 +39,11 @@ default['defaults']['global']['logrotate_options'] = %w[
 
 default['defaults']['database']['adapter'] = 'sqlite3'
 
-# scm
+# source
 ## common
 
-default['defaults']['scm']['remove_scm_files'] = true
+default['defaults']['source']['adapter'] = 'git'
+default['defaults']['source']['remove_scm_files'] = true
 
 # appserver
 ## common
@@ -49,12 +54,19 @@ default['defaults']['appserver']['dot_env'] = false
 default['defaults']['appserver']['preload_app'] = true
 default['defaults']['appserver']['timeout'] = 60
 default['defaults']['appserver']['worker_processes'] = 4
+default['defaults']['appserver']['after_deploy'] = 'stop-start' # (restart|clean-restart)
 
 ## puma
 
 default['defaults']['appserver']['log_requests'] = false
 default['defaults']['appserver']['thread_min'] = 0
 default['defaults']['appserver']['thread_max'] = 16
+default['defaults']['appserver']['on_restart'] = nil
+default['defaults']['appserver']['before_fork'] = nil
+default['defaults']['appserver']['on_worker_boot'] = nil
+default['defaults']['appserver']['on_worker_shutdown'] = nil
+default['defaults']['appserver']['on_worker_fork'] = nil
+default['defaults']['appserver']['after_worker_fork'] = nil
 
 ## thin
 

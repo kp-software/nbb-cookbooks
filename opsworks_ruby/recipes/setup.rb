@@ -7,6 +7,28 @@
 
 prepare_recipe
 
+# Create deployer user
+group node['deployer']['group'] do
+  gid 5000
+end
+
+user node['deployer']['user'] do
+  comment 'The deployment user'
+  uid 5000
+  gid 5000
+  shell '/bin/bash'
+  home node['deployer']['home']
+  manage_home true
+end
+
+sudo node['deployer']['user'] do
+  user      node['deployer']['user']
+  group     node['deployer']['group']
+  commands  %w[ALL]
+  host      'ALL'
+  nopasswd  true
+end
+
 # Monit and cleanup
 if node['platform_family'] == 'debian'
   execute 'mkdir -p /etc/monit/conf.d'
@@ -21,11 +43,11 @@ if node['platform_family'] == 'debian'
 end
 
 # Ruby and bundler
-include_recipe 'deployer'
 if node['platform_family'] == 'debian'
+  node.default['ruby-ng']['ruby_version'] = node['ruby-version']
   include_recipe 'ruby-ng::dev'
 else
-  ruby_pkg_version = node['ruby-ng']['ruby_version'].split('.')[0..1]
+  ruby_pkg_version = node['ruby-version'].split('.')[0..1]
   package "ruby#{ruby_pkg_version.join('')}"
   package "ruby#{ruby_pkg_version.join('')}-devel"
   execute "/usr/sbin/alternatives --set ruby /usr/bin/ruby#{ruby_pkg_version.join('.')}"
@@ -62,11 +84,11 @@ every_enabled_application do |application|
     databases.push(Drivers::Db::Factory.build(self, application, rds: rds))
   end
 
-  scm = Drivers::Scm::Factory.build(self, application)
+  source = Drivers::Source::Factory.build(self, application)
   framework = Drivers::Framework::Factory.build(self, application, databases: databases)
   appserver = Drivers::Appserver::Factory.build(self, application)
   worker = Drivers::Worker::Factory.build(self, application, databases: databases)
   webserver = Drivers::Webserver::Factory.build(self, application)
 
-  fire_hook(:setup, items: databases + [scm, framework, appserver, worker, webserver])
+  fire_hook(:setup, items: databases + [source, framework, appserver, worker, webserver])
 end
