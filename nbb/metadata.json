@@ -6,6 +6,7 @@
   "maintainer_email": "kevin@kpheasey.com",
   "license": "all_rights",
   "platforms": {
+
   },
   "dependencies": {
     "cloudwatch-logs": ">= 0.0.0",
@@ -16,21 +17,14 @@
     "swap": ">= 0.0.0",
     "yarn": ">= 0.0.0"
   },
-  "recommendations": {
-  },
-  "suggestions": {
-  },
-  "conflicting": {
-  },
   "providing": {
-  },
-  "replacing": {
+
   },
   "attributes": {
-  },
-  "groupings": {
+
   },
   "recipes": {
+
   },
   "version": "0.1.0",
   "source_url": "",

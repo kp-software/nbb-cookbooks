@@ -6,6 +6,6 @@
 
 # Create swap
 swap_file '/mnt/swap' do
-  size    2048 # MBs
+  size    node['swap']['size'] # MBs
   persist true
 end
