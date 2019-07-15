@@ -5,6 +5,8 @@
 # Recipe:: setup
 #
 
+include_recipe 'apt'
+
 prepare_recipe
 
 # Create deployer user
@@ -42,6 +44,12 @@ if node['platform_family'] == 'debian'
   end
 end
 
+if node['use-nodejs']
+  # NodeJS and Yarn
+  include_recipe 'nodejs'
+  include_recipe 'yarn'
+end
+
 # Ruby and bundler
 if node['platform_family'] == 'debian'
   node.default['ruby-ng']['ruby_version'] = node['ruby-version']
@@ -62,8 +70,20 @@ apt_repository 'apache2' do
   only_if { node['defaults']['webserver']['use_apache2_ppa'] }
 end
 
+apt_repository 'nginx' do
+  uri        'http://nginx.org/packages/ubuntu/'
+  components ['nginx']
+  keyserver 'keyserver.ubuntu.com'
+  key 'ABF5BD827BD9BF62'
+  only_if { node['defaults']['webserver']['adapter'] == 'nginx' }
+end
+
+bundler2_applicable = Gem::Requirement.new('>= 3.0.0.beta1').satisfied_by?(
+  Gem::Version.new(Gem::VERSION)
+)
 gem_package 'bundler' do
   action :install
+  version '~> 1' unless bundler2_applicable
 end
 
 if node['platform_family'] == 'debian'

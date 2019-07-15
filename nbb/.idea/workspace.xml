@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cff111b3-260f-4e6b-b849-95cf13cd98b7" name="Default" comment="fix(recipes/deploy): monit fix">
-      <change beforePath="$PROJECT_DIR$/attributes/default.rb" beforeDir="false" afterPath="$PROJECT_DIR$/attributes/default.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recipes/swap.rb" beforeDir="false" afterPath="$PROJECT_DIR$/recipes/swap.rb" afterDir="false" />
+    <list default="true" id="cff111b3-260f-4e6b-b849-95cf13cd98b7" name="Default" comment="feat(recipes/swap): set swap size from configuration, default to 2048">
+      <change beforePath="$PROJECT_DIR$/Berksfile" beforeDir="false" afterPath="$PROJECT_DIR$/Berksfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metadata.rb" beforeDir="false" afterPath="$PROJECT_DIR$/metadata.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes/configure.rb" beforeDir="false" afterPath="$PROJECT_DIR$/recipes/configure.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes/setup.rb" beforeDir="false" afterPath="$PROJECT_DIR$/recipes/setup.rb" afterDir="false" />
     </list>
     <ignored path="opsworks_mspcfo.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,19 +34,91 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/attributes/default.rb">
+        <entry file="file://$PROJECT_DIR$/recipes/deploy.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="255">
+              <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/recipes/setup.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/recipes/shutdown.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="21" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/recipes/swap.rb">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/recipes/undeploy.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Berksfile">
+          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
-              <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/metadata.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/recipes/configure.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/recipes/default.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="21" lean-forward="true" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -71,12 +145,16 @@
       <find>before_sym</find>
       <find>before_syml</find>
       <find>before_symlink</find>
+      <find>opsworks_ruby</find>
+      <find>whenever</find>
+      <find>log</find>
     </findStrings>
     <replaceStrings>
       <replace>usax</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
+      <dir>$PROJECT_DIR$/recipes</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -97,15 +175,15 @@
         <option value="$PROJECT_DIR$/layers/solr.json" />
         <option value="$PROJECT_DIR$/layers/schema.xml" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/recipes/configure.rb" />
         <option value="$PROJECT_DIR$/layers/web.json" />
         <option value="$PROJECT_DIR$/recipes/yarn.rb" />
-        <option value="$PROJECT_DIR$/Berksfile" />
-        <option value="$PROJECT_DIR$/metadata.rb" />
-        <option value="$PROJECT_DIR$/recipes/setup.rb" />
         <option value="$PROJECT_DIR$/recipes/deploy.rb" />
         <option value="$PROJECT_DIR$/attributes/default.rb" />
         <option value="$PROJECT_DIR$/recipes/swap.rb" />
+        <option value="$PROJECT_DIR$/metadata.rb" />
+        <option value="$PROJECT_DIR$/Berksfile" />
+        <option value="$PROJECT_DIR$/recipes/configure.rb" />
+        <option value="$PROJECT_DIR$/recipes/setup.rb" />
       </list>
     </option>
   </component>
@@ -134,17 +212,7 @@
             <path>
               <item name="opsworks_nbb" type="b2602c69:ProjectViewProjectNode" />
               <item name="opsworks_nbb" type="462c0819:PsiDirectoryNode" />
-              <item name="attributes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="opsworks_nbb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="opsworks_nbb" type="462c0819:PsiDirectoryNode" />
               <item name="recipes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="opsworks_nbb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="opsworks_nbb" type="462c0819:PsiDirectoryNode" />
-              <item name="spec" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -176,6 +244,9 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
@@ -267,7 +338,7 @@
       <workItem from="1528327053582" duration="168000" />
       <workItem from="1535122814605" duration="40000" />
       <workItem from="1537190104716" duration="791000" />
-      <workItem from="1563217284989" duration="336000" />
+      <workItem from="1563217284989" duration="1401000" />
     </task>
     <task id="LOCAL-00001" summary="Add whenever recipe">
       <created>1481229430687</created>
@@ -577,11 +648,18 @@
       <option name="project" value="LOCAL" />
       <updated>1537190223597</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="feat(recipes/swap): set swap size from configuration, default to 2048">
+      <created>1563217666726</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1563217666726</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42265000" />
+    <option name="totallyTimeSpent" value="43330000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="634" y="340" width="1680" height="1007" extended-state="0" />
@@ -599,7 +677,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.46394983" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.46341464" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.41097122" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -652,7 +730,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add customized solr recipe" />
     <MESSAGE value="Use solr_6" />
     <MESSAGE value="do not preload app to avoid extended downtime during deployments; users see browser loading instead of 500 error" />
     <MESSAGE value="Update cookbooks and add swap" />
@@ -677,7 +754,8 @@
     <MESSAGE value="Use package from github" />
     <MESSAGE value="add yarn cookbook" />
     <MESSAGE value="fix(recipes/deploy): monit fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(recipes/deploy): monit fix" />
+    <MESSAGE value="feat(recipes/swap): set swap size from configuration, default to 2048" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(recipes/swap): set swap size from configuration, default to 2048" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/irb/ruby-token.rb" />
@@ -690,40 +768,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/recipes/whenever.rb" />
-    <entry file="file://$PROJECT_DIR$/Berksfile.lock">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="31" column="6" selection-start-line="31" selection-start-column="2" selection-end-line="31" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/recipes/solr.rb" />
     <entry file="file://$PROJECT_DIR$/layers/schema.xml" />
     <entry file="file://$PROJECT_DIR$/layers/stack.json" />
     <entry file="file://$PROJECT_DIR$/layers/web.json" />
     <entry file="file://$PROJECT_DIR$/layers/solr.json" />
-    <entry file="file://$PROJECT_DIR$/recipes/undeploy.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/recipes/yarn.rb" />
-    <entry file="file://$PROJECT_DIR$/metadata.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Berksfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -731,6 +781,20 @@
             <caret line="4" selection-start-line="4" selection-end-line="8" selection-end-column="3" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/attributes/default.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Berksfile.lock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="40" column="17" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -748,10 +812,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recipes/deploy.rb">
+    <entry file="file://$PROJECT_DIR$/recipes/swap.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+        <state relative-caret-position="187">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recipes/undeploy.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/metadata.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Berksfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recipes/configure.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
@@ -762,31 +854,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/recipes/configure.rb">
+    <entry file="file://$PROJECT_DIR$/recipes/deploy.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="3" lean-forward="true" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+        <state relative-caret-position="255">
+          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/recipes/setup.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="22" lean-forward="true" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/attributes/default.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recipes/swap.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="1" lean-forward="true" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>

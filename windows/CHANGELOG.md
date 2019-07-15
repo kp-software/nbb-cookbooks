@@ -2,24 +2,6 @@
 
 This file is used to list changes made in each version of the windows cookbook.
 
-## 5.1.1 (2018-09-06)
-
-- Require the win32-certstore gem and upgrade the gem as the resource runs so we get the most up to date version
-- Remove redundant helper methods from the windows_certificate resource
-
-## 5.1.0 (2018-08-29)
-
-- Add an action to windows_user_privilege to remove a privilege
-- Fix failing appveyor tests
-- Require win32-certstore 0.1.8 which resolves several issues with the windows_certificate resource
-- Avoid deprecation warnings with Chef 14.3+ by not loading resources that are now built into Chef
-
-## 5.0.0 (2018-07-24)
-
-### Breaking Changes
-
-This release removes the windows_task and windows_path resources from this cookbook. This resources shipped in Chef 13.0 and 13.4 This raises the required version of chef-client for this cookbook to 13.4 or later.
-
 ## 4.3.4 (2018-07-18)
 
 - Fix error message typo in windows_feature_powershell

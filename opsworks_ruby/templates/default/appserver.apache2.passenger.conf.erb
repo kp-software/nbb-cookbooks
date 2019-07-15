@@ -10,6 +10,17 @@ Header always unset "X-Powered-By"
   ServerName <%= node['hostname'] %>
   ServerAlias <%= @application[:domains].join(" ") %>
 
+<% if @application[:enable_ssl] && @out[:force_ssl] %>
+<% if @out[:ssl_port].to_i == 443 %>
+  RewriteEngine On
+  RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R=301,L]
+<% else %>
+  RewriteEngine On
+  RewriteRule ^/?(.*) https://%{SERVER_NAME}:<%= @out[:ssl_port] %>/$1 [R=301,L]
+<% end %>
+
+<% else %>
+  # http support
   DocumentRoot <%= File.join(@deploy_dir, 'current', 'public') %>
 
   <Directory <%= File.join(@deploy_dir, 'current') %>>
@@ -52,13 +63,14 @@ Header always unset "X-Powered-By"
   </Location>
 
   RewriteEngine on
+<% end %>
 
   <%= @out[:extra_config] %>
 
 </VirtualHost>
 
 <% if @application[:enable_ssl] %>
-<% unless @out[:ssl_port] == 443 %>
+<% unless @out[:ssl_port].to_i == 443 %>
 Listen <%= @out[:ssl_port] %>
 <% end -%>
 
@@ -79,10 +91,10 @@ SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
 
   SSLEngine on
   SSLProxyEngine on
-  SSLCertificateFile /etc/apache2/ssl/<%= @application[:domains].first %>.crt
-  SSLCertificateKeyFile /etc/apache2/ssl/<%= @application[:domains].first %>.key
+  SSLCertificateFile <%= @ssl_cert_dir %>/<%= @application[:domains].first %>.crt
+  SSLCertificateKeyFile <%= @ssl_cert_dir %>/<%= @application[:domains].first %>.key
   <% if @application[:ssl_configuration][:chain] -%>
-  SSLCACertificateFile /etc/apache2/ssl/<%= @application[:domains].first %>.ca
+  SSLCACertificateFile <%= @ssl_cert_dir %>/<%= @application[:domains].first %>.ca
   <% end %>
   SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0
 
@@ -132,6 +144,8 @@ SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
     PassengerBaseURI <%= @appserver_config[:mount_point] %>
     PassengerAppRoot <%= File.join(@deploy_dir, 'current') %>
   </Location>
+
+  RequestHeader set X-Forwarded-Proto "https"
 
   RewriteEngine on
 

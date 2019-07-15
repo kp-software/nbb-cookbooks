@@ -1,6 +1,6 @@
-FROM ruby:2.5
+FROM ruby:2.6
 
-RUN printf "deb http://deb.debian.org/debian testing main\ndeb http://deb.debian.org/debian testing-updates main\ndeb http://security.debian.org testing/updates main" >> /etc/apt/sources.list
+RUN printf "deb http://deb.debian.org/debian testing main\ndeb http://deb.debian.org/debian testing-updates main" >> /etc/apt/sources.list
 RUN apt-get update && \
     apt-get install --yes --no-install-recommends apt-transport-https && \
     apt-get clean && \
@@ -30,20 +30,20 @@ RUN pip install yamllint
 
 WORKDIR $APP_HOME
 
+COPY Gemfile* $APP_HOME/
+RUN bundle install -j 4
+
+COPY package.json $APP_HOME/
+RUN npm install
+
 COPY .chef.login $APP_HOME/
 RUN mkdir -p /root/.chef
 RUN printf "client_key \"/cookbooks/opsworks_ruby/client.pem\"\n" >> /root/.chef/knife.rb
 RUN printf "node_name \"$(cat /cookbooks/opsworks_ruby/.chef.login)\"\n" >> /root/.chef/knife.rb
 RUN printf "cookbook_path \"/cookbooks\"\n" >> /root/.chef/knife.rb
 
-COPY package.json $APP_HOME/
-RUN npm install
-
-COPY Gemfile* $APP_HOME/
-RUN bundle install -j 4
-
-COPY Berksfile* $APP_HOME/
-COPY metadata.rb $APP_HOME/
 COPY README.md $APP_HOME/
+COPY metadata.rb $APP_HOME/
+COPY Berksfile* $APP_HOME/
 RUN chef exec berks
 

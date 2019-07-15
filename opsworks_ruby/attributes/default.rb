@@ -6,14 +6,19 @@ default['deployer']['group'] = 'deploy'
 default['deployer']['home'] = "/home/#{default['deployer']['user']}"
 
 # ruby
+default['apt']['compile_time_update'] = true
 default['build-essential']['compile_time'] = true
-default['ruby-version'] = node['ruby'].try(:[], 'version') || '2.5'
+default['ruby-version'] = node['ruby'].try(:[], 'version') || '2.6'
 default['nginx']['source']['modules'] = %w[
   nginx::http_ssl_module nginx::http_realip_module nginx::http_gzip_static_module nginx::headers_more_module
   nginx::http_stub_status_module
 ]
 
-default['deploy']['timeout'] = 600
+if node['use-nodejs']
+  # nodejs
+  default['nodejs']['repo'] = 'https://deb.nodesource.com/node_10.x'
+  default['nodejs']['version'] = '10.15.3'
+end
 
 # global
 default['defaults']['global']['environment'] = 'production'
@@ -33,6 +38,16 @@ default['defaults']['global']['logrotate_frequency'] = 'daily'
 default['defaults']['global']['logrotate_options'] = %w[
   missingok compress delaycompress notifempty copytruncate sharedscripts
 ]
+default['defaults']['global']['use_nodejs'] = false
+
+if node['use-nodejs']
+  default['defaults']['global']['symlinks']['node_modules'] = 'node_modules'
+  default['defaults']['global']['symlinks']['packs'] = 'public/packs'
+  default['defaults']['global']['create_dirs_before_symlink'].push('../../shared/node_modules')
+  default['defaults']['global']['create_dirs_before_symlink'].push('../../shared/packs')
+  default['defaults']['global']['purge_before_symlink'].push('node_modules')
+  default['defaults']['global']['purge_before_symlink'].push('public/packs')
+end
 
 # database
 ## common
@@ -98,6 +113,7 @@ default['defaults']['webserver']['log_level'] = 'info'
 default['defaults']['webserver']['remove_default_sites'] = %w[
   default default.conf 000-default 000-default.conf default-ssl default-ssl.conf
 ]
+default['defaults']['webserver']['force_ssl'] = false
 
 ## apache2
 

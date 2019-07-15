@@ -8,9 +8,21 @@ Listen <%= @out[:port] %>
   ServerName <%= node['hostname'] %>
   ServerAlias <%= @application[:domains].join(" ") %>
 
+<% if @application[:enable_ssl] && @out[:force_ssl] %>
+<% if @out[:ssl_port].to_i == 443 %>
+  RewriteEngine On
+  RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R=301,L]
+<% else %>
+  RewriteEngine On
+  RewriteRule ^/?(.*) https://%{SERVER_NAME}:<%= @out[:ssl_port] %>/$1 [R=301,L]
+<% end %>
+
+<% else %>
+  # http support
   DocumentRoot <%= File.join(@deploy_dir, 'current', 'public') %>
 
   <Directory <%= File.join(@deploy_dir, 'current') %>>
+    Require all granted
     Options FollowSymLinks
     AllowOverride None
     Order allow,deny
@@ -38,12 +50,13 @@ Listen <%= @out[:port] %>
   RewriteEngine on
 
   <Proxy balancer://<%= upstream %>>
-    BalancerMember http://127.0.0.1:3000
+    BalancerMember http://127.0.0.1:<%= @out[:appserver_port] %>
   </Proxy>
 
   RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
   RewriteRule ^/(.*)$ balancer://<%= upstream %>%{REQUEST_URI} [P,QSA,L]
 
+  ProxyPass /assets "!"
   ProxyPass / balancer://<%= upstream %>/
   ProxyPassReverse / balancer://<%= upstream %>/
   ProxyPreserveHost on
@@ -54,13 +67,13 @@ Listen <%= @out[:port] %>
     Order deny,allow
     Allow from all
   </Proxy>
+<% end %>
 
   <%= @out[:extra_config] %>
-
 </VirtualHost>
 
 <% if @application[:enable_ssl] %>
-<% unless @out[:ssl_port] == 443 %>
+<% unless @out[:ssl_port].to_i == 443 %>
 Listen <%= @out[:ssl_port] %>
 <% end -%>
 
@@ -72,6 +85,7 @@ SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
   DocumentRoot <%= File.join(@deploy_dir, 'current', 'public') %>
 
   <Directory <%= File.join(@deploy_dir, 'current') %>>
+    Require all granted
     Options FollowSymLinks
     AllowOverride None
     Order allow,deny
@@ -80,10 +94,10 @@ SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
 
   SSLEngine on
   SSLProxyEngine on
-  SSLCertificateFile /etc/apache2/ssl/<%= @application[:domains].first %>.crt
-  SSLCertificateKeyFile /etc/apache2/ssl/<%= @application[:domains].first %>.key
+  SSLCertificateFile <%= @ssl_cert_dir %>/<%= @application[:domains].first %>.crt
+  SSLCertificateKeyFile <%= @ssl_cert_dir %>/<%= @application[:domains].first %>.key
   <% if @application[:ssl_configuration][:chain] -%>
-  SSLCACertificateFile /etc/apache2/ssl/<%= @application[:domains].first %>.ca
+  SSLCACertificateFile <%= @ssl_cert_dir %>/<%= @application[:domains].first %>.ca
   <% end %>
   SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0
 
@@ -124,17 +138,19 @@ SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
   RewriteEngine on
 
   <Proxy balancer://<%= upstream %>>
-    BalancerMember http://127.0.0.1:3000
+    BalancerMember http://127.0.0.1:<%= @out[:appserver_port] %>
   </Proxy>
 
   RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_FILENAME} !-f
   RewriteRule ^/(.*)$ balancer://<%= upstream %>%{REQUEST_URI} [P,QSA,L]
 
+  ProxyPass /assets "!"
   ProxyPass / balancer://<%= upstream %>/
   ProxyPassReverse / balancer://<%= upstream %>/
   ProxyPreserveHost on
   ProxyAddHeaders On
   ProxyTimeout <%= @out[:proxy_timeout] || '60' %>
+  RequestHeader set X-Forwarded-Proto "https"
 
   <Proxy *>
     Order deny,allow
