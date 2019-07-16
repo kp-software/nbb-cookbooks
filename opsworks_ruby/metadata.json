@@ -21,25 +21,10 @@
     "seven_zip": "~> 2.0",
     "windows": "< 5.0"
   },
-  "recommendations": {
-
-  },
-  "suggestions": {
-
-  },
-  "conflicting": {
-
-  },
   "providing": {
 
   },
-  "replacing": {
-
-  },
   "attributes": {
-
-  },
-  "groupings": {
 
   },
   "recipes": {
