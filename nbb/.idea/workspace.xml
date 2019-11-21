@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e362ef19-867d-40cb-8371-4e919ceb6fc6" name="Default Changelist" comment="fix(setup): remove mysql-ruby, not needed until ubuntu 18">
+    <list default="true" id="e362ef19-867d-40cb-8371-4e919ceb6fc6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/recipes/setup.rb" beforeDir="false" afterPath="$PROJECT_DIR$/recipes/setup.rb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,7 +47,7 @@
       <option name="presentableId" value="Default" />
       <updated>1574300579706</updated>
       <workItem from="1574300580771" duration="3000" />
-      <workItem from="1574300586287" duration="3710000" />
+      <workItem from="1574300586287" duration="4730000" />
     </task>
     <task id="LOCAL-00001" summary="chore(deps): upgrade to latest opsworks_ruby">
       <created>1574300605980</created>
@@ -77,7 +77,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574304674897</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="chore(setup): remove mysql, it wasn't needed before...">
+      <created>1574343206104</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1574343206104</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,6 +118,7 @@
     <MESSAGE value="chore(metadata): update contact detail" />
     <MESSAGE value="feat(setup): add mysql dev packages" />
     <MESSAGE value="fix(setup): remove mysql-ruby, not needed until ubuntu 18" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(setup): remove mysql-ruby, not needed until ubuntu 18" />
+    <MESSAGE value="chore(setup): remove mysql, it wasn't needed before..." />
+    <option name="LAST_COMMIT_MESSAGE" value="chore(setup): remove mysql, it wasn't needed before..." />
   </component>
 </project>
