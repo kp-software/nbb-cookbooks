@@ -5,4 +5,3 @@
 #
 
 include_recipe 'opsworks_ruby::configure'
-include_recipe 'cloudwatch-logs::default'

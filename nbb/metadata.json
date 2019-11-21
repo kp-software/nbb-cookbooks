@@ -9,7 +9,6 @@
 
   },
   "dependencies": {
-    "cloudwatch-logs": ">= 0.0.0",
     "opsworks_ruby": ">= 0.0.0",
     "opsworks_whenever": ">= 0.0.0",
     "swap": ">= 0.0.0"

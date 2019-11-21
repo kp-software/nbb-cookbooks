@@ -6,7 +6,6 @@ description 'Installs/Configures opsworks_nbb'
 long_description 'Installs/Configures opsworks_nbb'
 version '0.1.0'
 
-depends 'cloudwatch-logs'
 depends 'opsworks_ruby'
 depends 'opsworks_whenever'
 depends 'swap'

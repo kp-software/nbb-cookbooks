@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cff111b3-260f-4e6b-b849-95cf13cd98b7" name="Default" comment="fix(recipes/deploy): remove old monit fix">
+    <list default="true" id="cff111b3-260f-4e6b-b849-95cf13cd98b7" name="Default" comment="fix(opsworks_ruby): use fork to fix default nginx configuration file">
       <change beforePath="$PROJECT_DIR$/Berksfile" beforeDir="false" afterPath="$PROJECT_DIR$/Berksfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/metadata.rb" beforeDir="false" afterPath="$PROJECT_DIR$/metadata.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recipes/configure.rb" beforeDir="false" afterPath="$PROJECT_DIR$/recipes/configure.rb" afterDir="false" />
     </list>
-    <ignored path="opsworks_mspcfo.iws" />
-    <ignored path=".idea/workspace.xml" />
-    <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,37 +26,6 @@
   </component>
   <component name="FavoritesManager">
     <favorites_list name="opsworks_mspcfo" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/recipes/deploy.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Berksfile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/recipes/default.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -95,65 +63,10 @@
     <option name="UPDATE_TYPE" value="REBASE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/recipes/schedule_feeds.rb" />
-        <option value="$PROJECT_DIR$/test.json" />
-        <option value="$PROJECT_DIR$/recipes/whenever.rb" />
-        <option value="$PROJECT_DIR$/.kitchen.yml" />
-        <option value="$PROJECT_DIR$/recipes/solr.rb" />
-        <option value="$PROJECT_DIR$/recipes/default.rb" />
-        <option value="$PROJECT_DIR$/recipes/shutdown.rb" />
-        <option value="$PROJECT_DIR$/recipes/undeploy.rb" />
-        <option value="$PROJECT_DIR$/layers/solr.json" />
-        <option value="$PROJECT_DIR$/layers/schema.xml" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/layers/web.json" />
-        <option value="$PROJECT_DIR$/recipes/yarn.rb" />
-        <option value="$PROJECT_DIR$/attributes/default.rb" />
-        <option value="$PROJECT_DIR$/recipes/swap.rb" />
-        <option value="$PROJECT_DIR$/metadata.rb" />
-        <option value="$PROJECT_DIR$/recipes/configure.rb" />
-        <option value="$PROJECT_DIR$/recipes/setup.rb" />
-        <option value="$PROJECT_DIR$/recipes/deploy.rb" />
-        <option value="$PROJECT_DIR$/Berksfile" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="146" />
-    <option name="y" value="182" />
-    <option name="width" value="2537" />
-    <option name="height" value="1214" />
-  </component>
+  <component name="ProjectId" id="1Tu9qK6z7Hvgxeecxm52b2AhyCz" />
   <component name="ProjectLevelVcsManager">
     <OptionsSetting value="false" id="Update" />
     <ConfirmationsSetting value="2" id="Add" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="opsworks_nbb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="opsworks_nbb" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="opsworks_nbb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="opsworks_nbb" type="462c0819:PsiDirectoryNode" />
-              <item name="recipes" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -225,11 +138,6 @@
       <envs />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Bash.package.sh" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="true" />
   <component name="SvnConfiguration">
@@ -276,7 +184,9 @@
       <workItem from="1563277415046" duration="97000" />
       <workItem from="1563277619806" duration="10000" />
       <workItem from="1563283663072" duration="4000" />
-      <workItem from="1563284560980" duration="547000" />
+      <workItem from="1563284560980" duration="1473000" />
+      <workItem from="1563288986111" duration="416000" />
+      <workItem from="1574299304028" duration="501000" />
     </task>
     <task id="LOCAL-00001" summary="Add whenever recipe">
       <created>1481229430687</created>
@@ -607,39 +517,28 @@
       <option name="project" value="LOCAL" />
       <updated>1563277486590</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="fix(opsworks_ruby): use fork to fix default nginx configuration file">
+      <created>1563287511182</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1563287511182</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45025000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="146" y="182" width="2537" height="1214" extended-state="0" />
-    <editor active="true" />
-    <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14549099" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3291367" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32873806" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.30695653" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.41097122" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" weight="0.3295074" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -647,12 +546,7 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
+              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
@@ -682,7 +576,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update cookbooks and add swap" />
     <MESSAGE value="Add back solr_6" />
     <MESSAGE value="declare dependencies" />
     <MESSAGE value="Add setup instructions for solr" />
@@ -707,118 +600,7 @@
     <MESSAGE value="feat(recipes/swap): set swap size from configuration, default to 2048" />
     <MESSAGE value="feat(opsworks_ruby): upgrade opsworks_ruby and remove all recipes covered by the new features" />
     <MESSAGE value="fix(recipes/deploy): remove old monit fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(recipes/deploy): remove old monit fix" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/irb/ruby-token.rb" />
-    <entry file="file://$PROJECT_DIR$/test.json" />
-    <entry file="file://$PROJECT_DIR$/.kitchen.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recipes/whenever.rb" />
-    <entry file="file://$PROJECT_DIR$/recipes/solr.rb" />
-    <entry file="file://$PROJECT_DIR$/layers/schema.xml" />
-    <entry file="file://$PROJECT_DIR$/layers/stack.json" />
-    <entry file="file://$PROJECT_DIR$/layers/web.json" />
-    <entry file="file://$PROJECT_DIR$/layers/solr.json" />
-    <entry file="file://$PROJECT_DIR$/recipes/yarn.rb" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="68">
-            <caret line="4" selection-start-line="4" selection-end-line="8" selection-end-column="3" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/attributes/default.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Berksfile.lock">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="40" column="17" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="9" lean-forward="true" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/metadata.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recipes/configure.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recipes/shutdown.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="21" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recipes/swap.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recipes/undeploy.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recipes/setup.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="14" lean-forward="true" selection-start-line="12" selection-start-column="14" selection-end-line="12" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recipes/deploy.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recipes/default.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Berksfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
+    <MESSAGE value="fix(opsworks_ruby): use fork to fix default nginx configuration file" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(opsworks_ruby): use fork to fix default nginx configuration file" />
   </component>
 </project>
