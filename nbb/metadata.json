@@ -1,9 +1,9 @@
 {
   "name": "nbb",
-  "description": "Installs/Configures opsworks_nbb",
-  "long_description": "Installs/Configures opsworks_nbb",
+  "description": "Installs/Configures opsworks_ruby",
+  "long_description": "Installs/Configures opsworks_ruby",
   "maintainer": "Kevin Pheasey",
-  "maintainer_email": "kevin@kpheasey.com",
+  "maintainer_email": "kevin@kpsoftware.io",
   "license": "all_rights",
   "platforms": {
 
