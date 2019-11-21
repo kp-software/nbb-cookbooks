@@ -12,5 +12,7 @@ include_recipe 'nbb::swap'
 package 'htop'
 package 'tmux'
 package 'imagemagick'
+package 'libmysql-ruby'
+package 'libmysqlclient-dev'
 
 include_recipe 'opsworks_ruby::setup'
