@@ -12,6 +12,5 @@ include_recipe 'nbb::swap'
 package 'htop'
 package 'tmux'
 package 'imagemagick'
-package 'ruby-dev'
 
 include_recipe 'opsworks_ruby::setup'
